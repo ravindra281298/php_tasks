@@ -11,17 +11,17 @@
 
         function addNumbers() {
             $this->getInput();
-            return $this->number1."+".$this->number2."=".($this->number1 + $this->number2);
+            return $this->display('+',$this->number1+$this->number2);
         }
 
         function subtractNumbers() {
             $this->getInput();
-            return $this->number1."-".$this->number2."=".($this->number1 - $this->number2);
+            return $this->display('-',$this->number1-$this->number2);
         }
 
         function multiplyNumbers() {
             $this->getInput();
-            return $this->number1."*".$this->number2."=".($this->number1 * $this->number2);
+            return $this->display('*',$this->number1*$this->number2);
         }
 
         function divideNumbers() {
@@ -29,8 +29,14 @@
             if($this->number2 == 0) {
                 return "Divisor cannot be zero!";
             }
-            return $this->number1."/".$this->number2."=".($this->number1 / $this->number2);
+            return $this->display('/',$this->number1/$this->number2);
         }
+
+        function display($operator, $result) {
+
+            return $this->number1.$operator.$this->number2."=".$result;
+        }
+
     }
 
     $flag = 1;
