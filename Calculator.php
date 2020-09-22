@@ -26,8 +26,9 @@
 
         function divideNumbers() {
             $this->getInput();
+
             if($this->number2 == 0) {
-                return "Divisor cannot be zero!";
+                throw new  Exception("Divisor cannot be zero!\n");
             }
             return $this->display('/',$this->number1/$this->number2);
         }
@@ -42,27 +43,34 @@
     $flag = 1;
     while($flag==1) {
 
-        echo "Calculator!\n 1.Addition\n 2.Subtraction\n 3.Multiplication\n 4.Division\n ";
-        $choice = (int)readline("Enter your choice(1-4): ");
+        try {
 
-        $object = new calculator();
+            echo "Calculator!\n 1.Addition\n 2.Subtraction\n 3.Multiplication\n 4.Division\n";
+            $choice = (int)readline("Enter your choice(1-4): ");
 
-        switch($choice) {
-            case 1: print $object->addNumbers();
-            break;
-            case 2: print $object->subtractNumbers();
-            break;
-            case 3: print $object->multiplyNumbers();
-            break;
-            case 4: print $object->divideNumbers();
-            break;
-            default: print " Please Enter correct choice!!";
+            $object = new calculator();
+
+            switch($choice) {
+                case 1: print $object->addNumbers();
+                break;
+                case 2: print $object->subtractNumbers();
+                break;
+                case 3: print $object->multiplyNumbers();
+                break;
+                case 4: print $object->divideNumbers();
+                break;
+                default: print " Please Enter correct choice!!";
+            }
+
+            echo "\n";
+            $choice =  readline("press 1 to continue and 0 to exit : ");
+            if($choice == 0) {
+                $flag=0;
+            }
         }
 
-        echo "\n";
-        $choice =  readline("press 1 to continue and 0 to exit : ");
-        if($choice == 0) {
-            $flag=0;
+        catch(Exception $msg) {
+            echo 'Message:' .$msg->getMessage() ;
         }
     }
 
